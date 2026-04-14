@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Keya Supply Co — Pack it Right, EVERYTIME</title>
+
+  <!-- ═══════════════════════════════════════════════════════
+       EXTERNAL RESOURCES
+       Fonts: Roboto Condensed (headings), Volkhov (italic serif), Open Sans (body)
+       Bootstrap 3: grid + base components
+       Font Awesome 4.7: icons
+  ═══════════════════════════════════════════════════════ -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Volkhov:ital@1&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <style>
+
+  /* ═══════════════════════════════════════════════════════
+     COLOUR PALETTE & GLOBAL VARIABLES
+     These are used site-wide. Change here to update everywhere.
+     --brand:       #3a7d5c  — main green (buttons, icons, accents)
+     --brand-dark:  #2a5c42  — darker green (hover states, cert band bg)
+     --brand-light: #5aab7e  — lighter green (stat numbers, icon highlights)
+     --terra:       #b87b5a  — terracotta orange (marquee strip bg)
+     --terra-light: #d49a7a  — light terracotta (eyebrow text, em accents)
+     --dark:        #1a1a1a  — near-black (footer, navbar-on-scroll)
+  ═══════════════════════════════════════════════════════ */
+  :root {
+    --brand:        #3a7d5c;
+    --brand-dark:   #2a5c42;
+    --brand-light:  #5aab7e;
+    --terra:        #b87b5a;
+    --terra-light:  #d49a7a;
+    --dark:         #1a1a1a;
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     GLOBAL RESET & BASE STYLES
+     body bg: #ffffff   body text: #555   headings: #333 #LQjK8wR9NUSY
+  ═══════════════════════════════════════════════════════ */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #555;
+    background: #ffffff;
+    overflow-x: hidden;
+    margin: 0; padding: 0;
+  }
+  h1,h2,h3,h4,h5,h6 { color: #333; }
+  a { color: var(--brand); transition: color 0.2s; }
+  a:hover { color: var(--brand-dark); text-decoration: none; }
+  img { max-width: 100%; }
+  .font-alt  { font-family: 'Roboto Condensed', sans-serif; }
+  .font-serif { font-family: 'Volkhov', serif; font-style: italic; }
+  .mb-20 { margin-bottom: 20px; }
+  .mb-30 { margin-bottom: 30px; }
+  .mb-40 { margin-bottom: 40px; }
+  .mt-40 { margin-top: 40px; }
+  .pb-0  { padding-bottom: 0; }
+  .align-center { text-align: center; }
+
+  /* ═══════════════════════════════════════════════════════
+     PAGE LOADER
+     bg: #1a1a1a (dark)   spinner accent: #5aab7e (brand-light)
+  ═══════════════════════════════════════════════════════ */
+  .page-loader {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #1a1a1a;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.5s;
+  }
+  .page-loader.loaded { opacity: 0; pointer-events: none; }
+  .loader {
+    width: 48px; height: 48px;
+    border: 3px solid rgba(255,255,255,0.15);
+    border-top-color: #5aab7e;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ═══════════════════════════════════════════════════════
+     NAVBAR
+     Transparent on top → #1a1a1a (97% opacity) on scroll
+     Brand text: #ffffff   Nav links: rgba(255,255,255,0.75)
+     "SUPPLY" accent: #d49a7a (terra-light)
+  ═══════════════════════════════════════════════════════ */
+  .navbar-custom {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 0 20px;
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+  .navbar-transparent { background: transparent; }
+  .navbar-scrolled {
+    background: rgba(26,26,26,0.97) !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .navbar-custom .navbar-brand {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 22px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: #ffffff !important; padding: 18px 0;
+  }
+  .navbar-custom .navbar-brand span { color: #d49a7a; }
+  .navbar-custom .nav > li > a {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.75) !important; padding: 22px 14px;
+    transition: color 0.2s;
+  }
+  .navbar-custom .nav > li > a:hover,
+  .navbar-custom .nav > li > a:focus { color: #ffffff !important; background: transparent !important; }
+  .navbar-toggle { border-color: rgba(255,255,255,0.3); margin-top: 14px; }
+  .navbar-toggle .icon-bar { background: #ffffff; }
+
+  /* ═══════════════════════════════════════════════════════
+     SHARED BUTTON STYLES
+     .btn-border-w  — white outline (used on dark/hero backgrounds)
+       bg: transparent   border: rgba(255,255,255,0.5)   text: #ffffff
+       hover bg: rgba(255,255,255,0.12)
+     .btn-brand     — solid green (used on light backgrounds)
+       bg: #3a7d5c   text: #ffffff
+       hover bg: #2a5c42
+     .btn-w         — white solid (used on green backgrounds)
+       bg: #ffffff   text: #1a1a1a
+     .btn-block     — full-width modifier
+  ═══════════════════════════════════════════════════════ */
+  .btn-border-w {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: #ffffff !important;
+    border: 2px solid rgba(255,255,255,0.5);
+    padding: 13px 32px; border-radius: 30px;
+    background: transparent;
+    transition: all 0.25s; display: inline-block; margin-top: 12px;
+  }
+  .btn-border-w:hover { background: rgba(255,255,255,0.12); border-color: #ffffff; color: #ffffff !important; }
+  .btn-brand {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    background: #3a7d5c; color: #ffffff !important;
+    padding: 12px 32px; border-radius: 30px;
+    border: 2px solid #3a7d5c;
+    transition: all 0.2s; display: inline-block;
+  }
+  .btn-brand:hover { background: #2a5c42; border-color: #2a5c42; }
+  .btn-w {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    background: #ffffff; color: #1a1a1a !important;
+    padding: 12px 28px; border-radius: 30px;
+    border: 2px solid #ffffff; transition: all 0.2s; display: inline-block;
+  }
+  .btn-w:hover { background: #f0f0f0; }
+  .btn-block { display: block; width: 100%; }
+
+  /* ═══════════════════════════════════════════════════════
+     SECTION WRAPPER DEFAULTS
+     .module       — standard section padding: 80px top/bottom
+     .module-small — compact section padding: 40px top/bottom
+     Section title (.module-title):  color #222
+     Section subtitle (.module-subtitle):  color #888
+  ═══════════════════════════════════════════════════════ */
+  .module { padding: 80px 0; }
+  .module-small { padding: 40px 0; }
+  .pt-140 { padding-top: 140px; }
+  .pb-140 { padding-bottom: 140px; }
+  .module-title {
+    font-size: 36px; font-weight: 700;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    color: #222; margin-bottom: 10px; text-align: center;
+  }
+  .module-subtitle {
+    font-size: 16px; color: #888;
+    text-align: center; max-width: 520px;
+    margin: 0 auto 48px; line-height: 1.65;
+  }
+  .module-icon { text-align: center; margin-bottom: 20px; }
+
+  /* ─── Dark section modifier (.bg-dark) ───
+     bg: #1a1a1a   text: rgba(255,255,255,0.7)
+     headings: #ffffff   links: rgba(255,255,255,0.7)
+  ─────────────────────────────────────────── */
+  .bg-dark { background: #1a1a1a !important; color: rgba(255,255,255,0.7); }
+  .bg-dark .module-title  { color: #ffffff; }
+  .bg-dark .module-subtitle { color: rgba(255,255,255,0.55); }
+  .bg-dark h5.widget-title { color: #ffffff; }
+  .bg-dark p { color: rgba(255,255,255,0.6); }
+  .bg-dark a { color: rgba(255,255,255,0.7); }
+  .bg-dark a:hover { color: #5aab7e; }
+
+  /* ═══════════════════════════════════════════════════════
+     HERO SECTION
+     bg: green gradient  #0f2318 → #1a3a28 → #2a5c42
+     Eyebrow text (.titan-title-size-1):  color #d49a7a (terra-light)
+     Main heading (.titan-title-size-4):  color #ffffff
+     <em> inside heading:  color #d49a7a (terra-light), underlined
+     Sub-paragraph:  color rgba(255,255,255,0.7)
+     Stat numbers:   color #d49a7a (terra-light)
+     Stat labels:    color rgba(255,255,255,0.6)
+     Buttons: use .btn-border-w (white outline, see above)
+     Slideshow: right panel, dynamic height (auto aspect-ratio)
+  ═══════════════════════════════════════════════════════ */
+  .home-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 5% 60px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    /* ─── GREEN HERO BACKGROUND ─── change these 3 colour stops to restyle */
+    background: linear-gradient(135deg, #0f2318 0%, #1a3a28 40%, #2a5c42 100%);
+    z-index: 0;
+  }
+  /* Subtle grid texture overlay on hero bg */
+  .hero-bg::before {
+    content: ''; position: absolute; inset: 0; opacity: 0.04;
+    background-image:
+      repeating-linear-gradient(0deg,   #fff 0, #fff 1px, transparent 1px, transparent 60px),
+      repeating-linear-gradient(90deg,  #fff 0, #fff 1px, transparent 1px, transparent 60px);
+  }
+  /* Radial green glow in centre */
+  .hero-bg::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 30% 50%, rgba(90,171,126,0.15) 0%, transparent 70%);
+  }
+  /* Split layout: left = text, right = slideshow */
+  .hero-split-container {
+    position: relative; z-index: 1;
+    display: flex; flex-wrap: wrap;
+    align-items: center;
+    width: 100%; max-width: 1400px;
+    margin: 0 auto; gap: 48px;
+  }
+  .hero-left  { flex: 1; min-width: 280px; }
+  .hero-right { flex: 1; min-width: 280px; }
+  .hero-text  { max-width: 520px; }
+  .titan-title-size-1 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: #d49a7a; /* terra-light */
+  }
+  .titan-title-size-4 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: clamp(38px, 5.5vw, 72px);
+    font-weight: 700; line-height: 1.1; text-transform: uppercase;
+    color: #ffffff;
+  }
+  .titan-title-size-4 em {
+    font-style: normal;
+    color: #d49a7a; /* terra-light */
+    border-bottom: 3px solid #d49a7a;
+  }
+  .hero-sub {
+    font-size: 16px; font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7; margin: 20px 0;
+  }
+  .hero-stats {
+    display: flex; gap: 36px; margin-top: 36px; flex-wrap: wrap;
+    padding-top: 36px; border-top: 1px solid rgba(255,255,255,0.15);
+  }
+  .hero-stat-num {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 34px; font-weight: 700;
+    color: #d49a7a; /* terra-light — matches button/em accent */
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-top: 4px;
+  }
+
+  /* ─── CSS-ONLY SLIDESHOW ───────────────────────────────
+     Slides through images automatically — no JS needed.
+     Height is DYNAMIC: it matches the natural height of each
+     image (object-fit: contain shows the full image, no crop).
+     To add/remove images: edit the <img> tags in the HTML.
+     To change speed: edit the 20s value in animation and
+     adjust the @keyframes percentages (currently 5 images).
+  ──────────────────────────────────────────────────────── */
+/* Right side container - centers the slideshow */
+.hero-right {
+  flex: 1;
+  display: flex;
+  align-items: center;      /* Centers vertically */
+  justify-content: center;  /* Centers horizontally */
+  padding: 20px;
+}
+
+/* Your slideshow container */
+.slideshow-container {
+  width: 100%;
+  max-width: 750px;  /* Your desired size */
+  height: 550px;     /* Your desired height */
+  border-radius: 20px;
+  overflow: hidden;
+ <!-- box-shadow: 0 20px 40px rgba(0,0,0,0.3);-->
+}
+
+/* The slideshow wrapper */
+.slideshow {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  animation: slideLoop 20s infinite;
+}
+
+/* The images - centered and cropped nicely */
+.slideshow img {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  object-fit: contain;      /* Centers and crops image to fill space */
+  object-position: center; /* Focus on center of each image */
+}
+
+@keyframes slideLoop {
+  0%, 16% { transform: translateX(0%); }
+  20%, 36% { transform: translateX(-100%); }
+  40%, 56% { transform: translateX(-200%); }
+  60%, 76% { transform: translateX(-300%); }
+  80%, 96% { transform: translateX(-400%); }
+  100% { transform: translateX(0%); }
+}
+
+
+  /* ═══════════════════════════════════════════════════════
+     MARQUEE STRIP  (below hero)
+     bg: #b87b5a (terra/orange)   text: rgba(255,255,255,0.9)
+     dot separators: rgba(255,255,255,0.4)
+  ═══════════════════════════════════════════════════════ */
+  .marquee-strip {
+    background: #b87b5a; /* terra */
+    padding: 10px 0; overflow: hidden; white-space: nowrap;
+  }
+  .marquee-inner { display: inline-block; animation: marquee 30s linear infinite; }
+  .marquee-inner span {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.9); margin: 0 30px;
+  }
+  .marquee-inner .dot { color: rgba(255,255,255,0.4); margin: 0 8px; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ═══════════════════════════════════════════════════════
+     ABOUT / SERVICES SECTION
+     bg: #ffffff (white)
+     Icon colour: #3a7d5c (brand green)
+     Feature titles (.features-title): #222
+     Feature body text: #777
+  ═══════════════════════════════════════════════════════ */
+  .features-item { text-align: center; padding: 20px 10px 30px; }
+  .features-icon { margin-bottom: 18px; }
+  .features-icon i { font-size: 36px; color: #3a7d5c; }
+  .features-title {
+    font-size: 16px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: #222; margin-bottom: 12px;
+  }
+  .features-item p { font-size: 14px; color: #777; line-height: 1.7; }
+
+  /* ═══════════════════════════════════════════════════════
+     CERTIFICATION BAND
+     bg: #2a5c42 (brand-dark green)
+     Strong text: #ffffff   Sub text: rgba(255,255,255,0.5)
+     Icon circles: rgba(255,255,255,0.12)
+  ═══════════════════════════════════════════════════════ */
+  .cert-band { background: #2a5c42; padding: 28px 0; text-align: center; }
+  .cert-band .cert-badge {
+    display: inline-flex; align-items: center; gap: 12px; margin: 8px 20px;
+  }
+  .cert-band .cert-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: center; font-size: 20px;
+  }
+  .cert-band .cert-text strong {
+    display: block;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; color: #ffffff;
+  }
+  .cert-band .cert-text span { font-size: 12px; color: rgba(255,255,255,0.5); }
+
+  /* ═══════════════════════════════════════════════════════
+     PRODUCTS / TABLES SECTION
+     bg: #ffffff (white)
+     Tab nav bg: #f0f0f0   inactive tab text: #777
+     Active tab: bg #3a7d5c, text #ffffff
+     Spec badges: bg #eef6f1, border #c8e0d2, text #2a5c42
+     Table header bg: #f5f5f5   header text: #444
+     Table row hover bg: #f9fdf9
+     Table body text: #555   first-column (model #): #333
+  ═══════════════════════════════════════════════════════ */
+  .product-tabs-nav {
+    display: flex; gap: 4px; margin-bottom: 36px;
+    background: #f0f0f0; border-radius: 40px; padding: 4px; width: fit-content;
+  }
+  .ptab-btn {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 10px 24px; border: none; cursor: pointer;
+    border-radius: 30px; background: transparent; color: #777; transition: all 0.2s;
+  }
+  .ptab-btn.active { background: #3a7d5c; color: #ffffff; }
+  .ptab-btn:hover:not(.active) { color: #333; background: #e4e4e4; }
+  .ptab-content { display: none; }
+  .ptab-content.active { display: block; }
+  .product-intro-text { font-size: 14px; color: #777; line-height: 1.75; margin-bottom: 20px; max-width: 680px; }
+  .spec-row { margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .spec-badge {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    background: #eef6f1; color: #2a5c42;
+    padding: 5px 14px; border-radius: 20px; border: 1px solid #c8e0d2;
+  }
+  .product-table-wrap { overflow-x: auto; }
+  .product-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+  .product-table thead tr { background: #f5f5f5; border-bottom: 2px solid #e0e0e0; }
+  .product-table thead th {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #444; padding: 12px 14px; text-align: left;
+  }
+  .product-table tbody tr { border-bottom: 1px solid #f0f0f0; transition: background 0.15s; }
+  .product-table tbody tr:hover { background: #f9fdf9; }
+  .product-table tbody td { padding: 12px 14px; color: #555; }
+  .product-table tbody td:first-child {
+    font-family: 'Courier New', monospace; font-weight: 600; font-size: 12px; color: #333;
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     CALLOUT BAND  ("Need a custom spec or bulk quote?")
+     bg: linear-gradient #1a3a28 → #2a5c42  (deep green)
+     Title text: #ffffff   Body text: rgba(255,255,255,0.65)
+     Button: .btn-w (white solid, see buttons above)
+  ═══════════════════════════════════════════════════════ */
+  .callout-bg { background: linear-gradient(135deg, #1a3a28, #2a5c42); padding: 40px 0; }
+  .callout-text .callout-title {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 26px; font-weight: 700;
+    color: #ffffff; margin: 0 0 6px; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .callout-text p { color: rgba(255,255,255,0.65); margin: 0; }
+
+  /* ═══════════════════════════════════════════════════════
+     WHY US / ALT-FEATURES SECTION
+     bg: #f8f8f8 (light gray)
+     Icon circle bg: #3a7d5c (brand green)   icon: #ffffff
+     Feature heading: #222   Feature body: #777
+     Centre image column: placeholder bg #e8f5f0 → #c8e8d8
+  ═══════════════════════════════════════════════════════ */
+  .alt-features-item { margin-bottom: 28px; display: flex; gap: 16px; align-items: flex-start; }
+  .alt-features-icon {
+    width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%;
+    background: #3a7d5c;
+    display: flex; align-items: center; justify-content: center;
+    color: #ffffff; font-size: 18px;
+  }
+  .alt-features-title {
+    font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: #222; margin: 0 0 6px;
+  }
+  .alt-features-item p { font-size: 13px; color: #777; line-height: 1.65; margin: 0; }
+  .alt-services-image { text-align: center; }
+  .alt-services-image img { max-width: 100%; border-radius: 4px; box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+
+  /* ═══════════════════════════════════════════════════════
+     INDUSTRIES GRID
+     bg: none (white from parent section)
+     Each card: hover reveals green overlay rgba(26,60,38,0.82)
+     Card title: #ffffff   Card subtitle: #d49a7a (terra-light)
+     "Add Photo" placeholder text: rgba(255,255,255,0.5)
+  ═══════════════════════════════════════════════════════ */
+  .works-grid { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; }
+  .work-item { width: 33.333%; position: relative; overflow: hidden; }
+  .industry-placeholder { width: 100%; padding-top: 66%; position: relative; overflow: hidden; }
+  .industry-placeholder-inner {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Roboto Condensed', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5);
+  }
+  .work-caption {
+    position: absolute; inset: 0;
+    background: rgba(26,60,38,0.82);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s; text-align: center; padding: 20px;
+  }
+  .work-item:hover .work-caption { opacity: 1; }
+  .work-title { font-size: 18px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #ffffff; margin: 0 0 8px; }
+  .work-descr { font-size: 12px; color: #d49a7a; letter-spacing: 0.15em; text-transform: uppercase; }
+  @media(max-width:767px) { .work-item { width: 50%; } }
+  @media(max-width:480px) { .work-item { width: 100%; } }
+
+  /* ═══════════════════════════════════════════════════════
+     STATS / COUNTER BAND
+     bg: linear-gradient #1a3a28 → #2a5c42  (deep green)
+     Section title: #ffffff   subtitle: rgba(255,255,255,0.55)
+     Counter numbers (.count-to): #ffffff
+     Counter icons: #5aab7e (brand-light)
+     Counter labels: rgba(255,255,255,0.6)
+  ═══════════════════════════════════════════════════════ */
+  .count-item { text-align: center; }
+  .count-icon { margin-bottom: 14px; }
+  .count-icon i { font-size: 36px; color: #5aab7e; }
+  .count-to {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 56px; font-weight: 700; color: #ffffff; margin: 0 0 8px; line-height: 1;
+  }
+  .count-title { font-size: 13px; color: rgba(255,255,255,0.6); margin: 0; }
+  .mb-sm-40 { margin-bottom: 0; }
+  @media(max-width:767px) { .mb-sm-40 { margin-bottom: 40px; } }
+
+  /* ═══════════════════════════════════════════════════════
+     TESTIMONIALS SECTION
+     bg: #1a3a28  (deep forest green)
+     Quote text: rgba(255,255,255,0.85)
+     Author name: #ffffff   Role/company: #d49a7a (terra-light)
+     Quote icon: rgba(255,255,255,0.3)
+     Dots: rgba(255,255,255,0.25) → active: #5aab7e (brand-light)
+  ═══════════════════════════════════════════════════════ */
+  .testimonial { background: #1a3a28 !important; }
+  .testimonial-text {
+    font-size: 20px; line-height: 1.65;
+    color: rgba(255,255,255,0.85); text-align: center; border: none; padding: 0; margin: 0;
+  }
+  .testimonial-author { text-align: center; margin-top: 28px; }
+  .testimonial-title {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 15px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #ffffff;
+  }
+  .testimonial-descr { font-size: 13px; color: #d49a7a; margin-top: 4px; }
+  .testimonial-slide { display: none; }
+  .testimonial-slide.active { display: block; }
+  .testimonial-dots { text-align: center; margin-top: 40px; }
+  .testimonial-dots button {
+    width: 10px; height: 10px; border-radius: 50%;
+    border: none; background: rgba(255,255,255,0.25); margin: 0 5px; cursor: pointer; transition: background 0.2s;
+  }
+  .testimonial-dots button.active { background: #5aab7e; }
+
+  /* ═══════════════════════════════════════════════════════
+     CONTACT SECTION
+     bg: #ffffff (white)
+     Section title: #222   subtitle: #888
+     Info icon circles: bg #3a7d5c, icon #ffffff
+     Info labels: #aaa   Info values: #333
+     Form bg: #f8f8f8   Form border: #e0e0e0
+     Form focus border: #3a7d5c
+     Submit button: .btn-brand (green, see buttons above)
+     Success message bg: #eef6f1, border: #a8d8bc, text: #2a5c42
+  ═══════════════════════════════════════════════════════ */
+  .form-control {
+    font-family: 'Open Sans', sans-serif; font-size: 14px; color: #333;
+    background: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 4px;
+    padding: 12px 16px; height: auto; width: 100%; transition: border-color 0.2s;
+  }
+  .form-control:focus { border-color: #3a7d5c; outline: none; box-shadow: none; background: #ffffff; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    font-family: 'Roboto Condensed', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: #888; display: block; margin-bottom: 6px;
+  }
+  .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media(max-width:600px) { .form-row-2 { grid-template-columns: 1fr; } }
+  .form-success-msg {
+    display: none; margin-top: 16px;
+    background: #eef6f1; border: 1px solid #a8d8bc;
+    border-radius: 4px; padding: 14px 18px;
+    font-size: 14px; color: #2a5c42;
+    font-family: 'Roboto Condensed', sans-serif; font-weight: 700; letter-spacing: 0.06em;
+  }
+  .contact-info-item { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 24px; }
+  .contact-info-icon {
+    width: 42px; height: 42px; flex-shrink: 0; border-radius: 50%;
+    background: #3a7d5c;
+    display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 16px;
+  }
+  .contact-info-label {
+    font-family: 'Roboto Condensed', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase; color: #aaa; margin-bottom: 4px;
+  }
+  .contact-info-val { font-size: 15px; color: #333; font-weight: 600; line-height: 1.4; }
+  .contact-info-val small { display: block; font-size: 12px; font-weight: 400; color: #888; margin-top: 2px; }
+
+  /* ═══════════════════════════════════════════════════════
+     FOOTER WIDGETS
+     bg: #1a1a1a (dark)   text: rgba(255,255,255,0.6)
+     Widget titles: #ffffff with bottom border rgba(255,255,255,0.1)
+     List items: rgba(255,255,255,0.55), bullet color: #5aab7e
+  ═══════════════════════════════════════════════════════ */
+  .icon-list { list-style: none; padding: 0; margin: 0; }
+  .icon-list li {
+    padding: 4px 0; font-size: 13px; color: rgba(255,255,255,0.55);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .icon-list li::before { content: '— '; color: #5aab7e; }
+  .icon-list a { color: rgba(255,255,255,0.6) !important; }
+  .icon-list a:hover { color: #5aab7e !important; }
+  .widget { margin-bottom: 20px; }
+  .widget-title {
+    font-family: 'Roboto Condensed', sans-serif; font-size: 14px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: #ffffff; margin-bottom: 16px;
+    padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     FOOTER BAR
+     bg: #1a1a1a (dark)   copyright text: rgba(255,255,255,0.4)
+     Social icon border: rgba(255,255,255,0.15)  → hover: #5aab7e
+     Divider line (.divider-d): #333
+  ═══════════════════════════════════════════════════════ */
+  .divider-d { border-color: #333; margin: 0; }
+  footer.footer { padding: 30px 0; }
+  .copyright {
+    font-family: 'Roboto Condensed', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.08em; color: rgba(255,255,255,0.4); margin: 0;
+  }
+  .copyright a { color: rgba(255,255,255,0.6); }
+  .footer-social-links { text-align: right; }
+  .footer-social-links a {
+    display: inline-block; width: 34px; height: 34px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.5) !important;
+    text-align: center; line-height: 32px; font-size: 14px; margin-left: 6px; transition: all 0.2s;
+  }
+  .footer-social-links a:hover { border-color: #5aab7e; color: #5aab7e !important; }
+  @media(max-width:767px) { .footer-social-links { text-align: left; margin-top: 12px; } }
+
+  /* ═══════════════════════════════════════════════════════
+     SCROLL-UP BUTTON
+     bg: #3a7d5c (brand green)   icon: #ffffff
+     hover bg: #2a5c42
+  ═══════════════════════════════════════════════════════ */
+  .scroll-up {
+    position: fixed; bottom: 30px; right: 30px; z-index: 500;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  }
+  .scroll-up.visible { opacity: 1; pointer-events: all; }
+  .scroll-up a {
+    display: flex; align-items: center; justify-content: center;
+    width: 42px; height: 42px; border-radius: 50%;
+    background: #3a7d5c; color: #ffffff !important; font-size: 18px;
+  }
+  .scroll-up a:hover { background: #2a5c42; }
+
+  /* Responsive hero */
+  @media(max-width:900px) {
+    .hero-split-container { flex-direction: column; }
+    .hero-text { max-width: 100%; }
+    .hero-stats { justify-content: flex-start; }
+  }
+
+  </style>
+</head>
+<body data-spy="scroll" data-target=".navbar-custom" data-offset="70">
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE LOADER
+     Shows while page loads, fades out after 400ms
+═══════════════════════════════════════════════════════ -->
+<div class="page-loader" id="pageLoader">
+  <div class="loader"></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     NAVBAR
+     Transparent → dark on scroll
+     Logo: "KEYA SUPPLY CO" (SUPPLY in terra-light #d49a7a)
+     Nav links: Home / About / Industries / Products / Why Us / Contact
+═══════════════════════════════════════════════════════ -->
+<nav class="navbar navbar-custom navbar-transparent" id="mainNav" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" type="button" id="navToggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#home">KEYA <span>SUPPLY</span> CO</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navCollapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#why-us">Why Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO SECTION
+     bg: green gradient  #0f2318 → #1a3a28 → #2a5c42
+     Left: headline + subtext + stats + buttons
+     Right: auto-sliding image show (5 images, 20s cycle, pauses on hover)
+     Image files: 1.jpg, 2.png, 3.jpg, 4.jpg, 5.jpg
+     → place images in same folder as this HTML file
+     → add/remove <img> tags inside .slideshow to change count
+     → if you change image count, update .slideshow width and
+       .slideshow img width and the @keyframes translateX values
+═══════════════════════════════════════════════════════ -->
+<section class="home-section" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-split-container">
+
+    <!-- LEFT: Text content --> 
+    <div class="hero-left">
+      <div class="hero-text">
+        <div class="font-alt mb-30 titan-title-size-1">
+          ISO Certified · AAR Approved · Windsor, ON &amp; Detroit, MI
+        </div>
+        <div class="font-alt mb-40 titan-title-size-4">
+          Pack it Right,<br><em>Every Time.</em>
+        </div>
+        <p class="hero-sub">
+          Industrial-grade PET &amp; PP strapping — bulk wholesale supply across
+          the U.S. and Canada. Built for distributors, logistics operators, and
+          heavy industry.
+        </p>
+        <div class="mt-40">
+          <a class="btn-border-w" href="#products">View Products</a>&nbsp;&nbsp;
+          <a class="btn-border-w" href="#contact">Get a Quote</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">13+</div>
+            <div class="hero-stat-label">PET SKUs</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">9</div>
+            <div class="hero-stat-label">PP SKUs</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">28</div>
+            <div class="hero-stat-label">Coils / Pallet</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">2</div>
+            <div class="hero-stat-label">Countries</div>
+          </div>
+	    <div>
+            <div class="hero-stat-num">Colour & Size</div>
+            <div class="hero-stat-label">Customization</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: CSS-only slideshow — no JavaScript needed -->
+    <div class="hero-right">
+      <div class="slideshow-container">
+        <div class="slideshow">
+          <img src="1.png"  alt="Strapping product 1">
+          <img src="2.png"  alt="Strapping product 2">
+          <img src="3.jpg"  alt="Strapping product 3">
+          <img src="4.jpg"  alt="Strapping product 4">
+          <img src="5.jpg"  alt="Strapping product 5">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     MARQUEE STRIP
+     Scrolling keyword bar — bg: #b87b5a (terra orange)
+═══════════════════════════════════════════════════════ -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>PET Strapping</span><span class="dot">·</span>
+    <span>PP Strapping</span><span class="dot">·</span>
+    <span>AAR Approved</span><span class="dot">·</span>
+    <span>ISO Certified</span><span class="dot">·</span>
+    <span>Bulk Wholesale</span><span class="dot">·</span>
+    <span>Windsor · Detroit</span><span class="dot">·</span>
+    <span>EDI Compatible</span><span class="dot">·</span>
+   <!-- <span>Lumber &amp; Steel</span><span class="dot">·</span> -->
+    <span>PET Strapping</span><span class="dot">·</span>
+    <span>PP Strapping</span><span class="dot">·</span>
+    <span>AAR Approved</span><span class="dot">·</span>
+    <span>ISO Certified</span><span class="dot">·</span>
+    <span>Bulk Wholesale</span><span class="dot">·</span>
+    <span>Windsor · Detroit</span><span class="dot">·</span>
+    <span>EDI Compatible</span><span class="dot">·</span>
+    <span>Lumber &amp; Steel</span><span class="dot">·</span>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════════════════════════════════════════════
+     ABOUT / SERVICES SECTION
+     bg: #ffffff (white)   8-icon grid of product/service cards
+═══════════════════════════════════════════════════════ -->
+<section class="module" id="about">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2 text-center">
+        <h2 class="module-title font-alt">About Keya Supply Co</h2>
+        <div class="module-subtitle font-serif">
+          We specialize in high-performance PET and PP strapping for North American industry. By sourcing directly from ISO-certified manufacturers and eliminating middlemen, we provide bulk wholesale solutions that combine factory-direct pricing with local reliability.
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="features-item">
+          <div class="features-icon"><i class="fa fa-industry"></i></div>
+          <h3 class="features-title font-alt">Heavy-Duty PET Straps</h3>
+          <p>High-tensile polyester strapping with minimal stretch. Ideal for steel coils, lumber, construction materials, and industrial equipment. Weather-resistant for outdoor use.</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="features-item">
+          <div class="features-icon"><i class="fa fa-train"></i></div>
+          <h3 class="features-title font-alt">AAR Approved Straps</h3>
+          <p>Association of American Railroads certified strapping for rail freight. Smooth and embossed types — meeting all AAR specs for safe, compliant transit.</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="features-item">
+          <div class="features-icon"><i class="fa fa-cubes"></i></div>
+          <h3 class="features-title font-alt">Polypropylene Straps</h3>
+          <p>Lightweight, economical solution for light-to-medium loads. Excellent flexibility for carton bundling, newspaper packaging, and palletizing. Hand &amp; machine grade available.</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="features-item">
+          <div class="features-icon"><i class="fa fa-sliders"></i></div>
+          <h3 class="features-title font-alt">Custom Specifications</h3>
+          <p>Need a specific width, thickness, or color? We work directly with manufacturers to fulfill custom orders. Volume pricing for pallets and truckloads.</p>
+        </div>
+      </div>
+      <div class="clearfix visible-md visible-lg"></div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="features-item">
+          <div class="features-icon"><i class="fa fa-exchange"></i></div>
+          <h3 class="features-title font-alt">EDI Compatible</h3>
+          <p>Streamlined order placement and demand forecasting integration. We make procurement frictionless — connect your system and let supply take care of itself.</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="features-item">
+          <div class="features-icon"><i class="fa fa-truck"></i></div>
+          <h3 class="features-title font-alt">Reliable Supply Chain</h3>
+          <p>Maintained inventory and streamlined cross-border logistics from Windsor, ON to Detroit, MI and all of North America. Fast, hassle-free delivery — pallet or truckload.</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="features-item">
+          <div class="features-icon"><i class="fa fa-leaf"></i></div>
+          <h3 class="features-title font-alt">Eco-Friendly PET</h3>
+          <p>Our PET strapping is fully recyclable, contributing to a greener supply chain. Environmentally responsible packaging that meets modern sustainability goals.</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="features-item">
+          <div class="features-icon"><i class="fa fa-dollar"></i></div>
+          <h3 class="features-title font-alt">Bulk Discounts</h3>
+          <p>Direct manufacturer sourcing means we cut out the middlemen and pass the savings to you. Volume-tiered pricing from single pallets up to full truckloads.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     CERTIFICATION BAND
+     bg: #2a5c42 (dark green)
+     Shows AAR Approved, ISO Certified, Windsor/Detroit badges
+═══════════════════════════════════════════════════════ -->
+<div class="cert-band">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="cert-badge">
+          <div class="cert-icon">🚂</div>
+          <div class="cert-text">
+            <strong>AAR Approved</strong>
+            <span>Association of American Railroads</span>
+          </div>
+        </div>
+        <div class="cert-badge">
+          <div class="cert-icon">✅</div>
+          <div class="cert-text">
+            <strong>ISO Certified</strong>
+            <span>International Standards Organization</span>
+          </div>
+        </div>
+        <div class="cert-badge">
+          <div class="cert-icon">📍</div>
+          <div class="cert-text">
+            <strong>Windsor, ON &amp; Detroit, MI</strong>
+            <span>Serving all of North America</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PRODUCTS / TABLES SECTION
+     bg: #ffffff (white)
+     3 tabs: PET Normal / AAR Approved / PP Straps
+     Each tab shows intro text, spec badges, full data table
+     HOW TO SWITCH TABS: click tab buttons (JavaScript below)
+═══════════════════════════════════════════════════════ -->
+<section class="module" id="products">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <h2 class="module-title font-alt">Product Catalogue</h2>
+        <div class="module-subtitle font-serif">
+          Full specifications for every SKU — compare widths, thicknesses,
+          breaking strengths, and Signode-comparable models.
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+
+        <!-- Tab navigation -->
+        <div class="product-tabs-nav">
+          <button class="ptab-btn active" onclick="switchTab('pet',this)">PET Straps (Normal)</button>
+          <button class="ptab-btn" onclick="switchTab('aar',this)">AAR Approved</button>
+          <button class="ptab-btn" onclick="switchTab('pp',this)">PP Straps</button>
+        </div>
+
+        <!-- TAB 1: PET Normal -->
+        <div class="ptab-content active" id="ptab-pet">
+          <p class="product-intro-text">High-tensile smooth polyester strapping for heavy-duty applications. Excellent load stability with minimal stretch — ideal for construction materials, steel coils, and industrial equipment. Weather-resistant for long-term outdoor use.</p>
+          <div class="spec-row">
+            <span class="spec-badge">Type: Smooth</span>
+            <span class="spec-badge">Color: Green</span>
+            <span class="spec-badge">28 Coils / Pallet</span>
+          </div>
+          <div class="product-table-wrap">
+            <table class="product-table">
+              <thead>
+                <tr>
+                  <th>Model #</th><th>Width</th><th>Thickness</th>
+                  <th>Break Strength (lbs)</th><th>Break Strength (N)</th>
+                  <th>Length (ft)</th><th>Weight/Coil (lbs)</th><th>Signode Comparable</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>N-090368-S</td><td>3/8"</td><td>0.0145"</td><td>300</td><td>1,334</td><td>18,000</td><td>55</td><td>1614 / 2X2226</td></tr>
+                <tr><td>N-090050-S</td><td>3/8"</td><td>0.0195"</td><td>425</td><td>1,890</td><td>14,500</td><td>59</td><td>1616ELC / 2X1710</td></tr>
+                <tr><td>N-105050-S</td><td>7/16"</td><td>0.0195"</td><td>475</td><td>2,112</td><td>11,550</td><td>55</td><td>1716 / 2X1488</td></tr>
+                <tr><td>N-105056-S</td><td>7/16"</td><td>0.022"</td><td>550</td><td>2,446</td><td>9,000</td><td>53</td><td>1718 / 2X1498</td></tr>
+                <tr><td>N-120044-S</td><td>1/2"</td><td>0.0175"</td><td>500</td><td>2,220</td><td>10,500</td><td>55</td><td>1816</td></tr>
+                <tr><td>N-120052-S</td><td>1/2"</td><td>0.0205"</td><td>600</td><td>2,670</td><td>9,000</td><td>55</td><td>1818</td></tr>
+                <tr><td>N-120071-S</td><td>1/2"</td><td>0.028"</td><td>800</td><td>3,560</td><td>6,500</td><td>55</td><td>1822</td></tr>
+                <tr><td>N-150076-S</td><td>5/8"</td><td>0.030"</td><td>1,100</td><td>4,893</td><td>4,600</td><td>49</td><td>2X1365</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 2: AAR Approved -->
+        <div class="ptab-content" id="ptab-aar">
+          <p class="product-intro-text">AAR-certified polyester strapping for rail freight. Available in smooth and embossed types to meet all Association of American Railroads specifications for safe transit of heavy freight across North America.</p>
+          <div class="spec-row">
+            <span class="spec-badge">AAR Certified</span>
+            <span class="spec-badge">Smooth &amp; Embossed</span>
+            <span class="spec-badge">5/8" – 3/4" Width</span>
+            <span class="spec-badge">28 Coils / Pallet</span>
+          </div>
+          <div class="product-table-wrap">
+            <table class="product-table">
+              <thead>
+                <tr>
+                  <th>Model #</th><th>Type</th><th>Width</th><th>Thickness</th>
+                  <th>Break Strength (lbs)</th><th>Length (ft)</th>
+                  <th>Weight/Coil (lbs)</th><th>Signode Comparable</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>AAR-16089-S</td><td>Smooth</td><td>5/8"</td><td>0.035"</td><td>1,400</td><td>4,000</td><td>49</td><td>2X1369*</td></tr>
+                <tr><td>AAR-16102-S</td><td>Smooth</td><td>5/8"</td><td>0.040"</td><td>1,600</td><td>4,000</td><td>49</td><td>N/A</td></tr>
+                <tr><td>AAR-16089-E</td><td>Embossed</td><td>5/8"</td><td>0.035"</td><td>1,400</td><td>4,000</td><td>49</td><td>2X2229*</td></tr>
+                <tr><td>AAR-16102-E</td><td>Embossed</td><td>5/8"</td><td>0.040"</td><td>1,600</td><td>4,000</td><td>49</td><td>2X2243*</td></tr>
+                <tr><td>AAR-19102-E</td><td>Embossed</td><td>3/4"</td><td>0.040"</td><td>1,900</td><td>3,000</td><td>49</td><td>2X2233*</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 3: PP Straps -->
+        <div class="ptab-content" id="ptab-pp">
+          <p class="product-intro-text">Lightweight, economical strapping for light-to-medium loads. Excellent flexibility and stretch — suitable for carton bundling, newspaper packaging, and palletizing. Available in hand and machine grade.</p>
+          <div class="spec-row">
+            <span class="spec-badge">Type: Embossed</span>
+            <span class="spec-badge">Colors: Black, White, Yellow</span>
+            <span class="spec-badge">28 Coils / Pallet</span>
+          </div>
+          <div class="product-table-wrap">
+            <table class="product-table">
+              <thead>
+                <tr>
+                  <th>Model #</th><th>Width</th><th>Thickness</th>
+                  <th>Break Strength (lbs)</th><th>Length (ft)</th>
+                  <th>Weight/Coil (lbs)</th><th>Coil Size</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>PP-120046-E</td><td>1/2"</td><td>0.018"</td><td>300</td><td>9,000</td><td>20</td><td>16x6, 8x8</td></tr>
+                <tr><td>PP-120056-E</td><td>1/2"</td><td>0.022"</td><td>400</td><td>9,000</td><td>25</td><td>16x6, 8x8</td></tr>
+                <tr><td>PP-120066-E</td><td>1/2"</td><td>0.026"</td><td>500</td><td>7,200</td><td>24</td><td>16x6, 8x8</td></tr>
+                <tr><td>PP-120076-E</td><td>1/2"</td><td>0.030"</td><td>600</td><td>7,200</td><td>29</td><td>16x6, 8x8</td></tr>
+                <tr><td>PP-120094-E</td><td>1/2"</td><td>0.037"</td><td>750</td><td>5,575</td><td>34</td><td>16x6</td></tr>
+                <tr><td>PP-160064-E</td><td>5/8"</td><td>0.025"</td><td>700</td><td>6,000</td><td>31</td><td>16x6</td></tr>
+                <tr><td>PP-160076-E</td><td>5/8"</td><td>0.030"</td><td>800</td><td>5,400</td><td>33</td><td>16x6, 8x8</td></tr>
+                <tr><td>PP-160081-E</td><td>5/8"</td><td>0.032"</td><td>1,000</td><td>3,500</td><td>27</td><td>16x6</td></tr>
+                <tr><td>PP-160084-E</td><td>5/8"</td><td>0.033"</td><td>1,000</td><td>4,500</td><td>35</td><td>16x6, 8x8</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     CALLOUT BAND  —  "Need a custom spec or bulk quote?"
+     bg: linear-gradient #1a3a28 → #2a5c42  (deep green)
+     Button: .btn-w (white solid)
+═══════════════════════════════════════════════════════ -->
+<div class="callout-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="callout-text font-alt">
+          <h3 class="callout-title">Need a custom spec or a bulk quote?</h3>
+          <p>We supply pallet quantities up to full truckloads across the U.S. and Canada. Let's talk.</p>
+        </div>
+      </div>
+      <div class="col-sm-4" style="display:flex;align-items:center;">
+        <a class="btn-w" href="#contact">Request a Quote</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     WHY US / ALT-FEATURES SECTION
+     bg: #f8f8f8 (light gray)
+     3-column layout: left features / centre image / right features
+     Centre image: replace placeholder with your product photo
+     → edit the <img src="Straps.jpg"> line
+═══════════════════════════════════════════════════════ -->
+<section class="module" id="why-us" style="background:#f8f8f8;">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <h2 class="module-title font-alt">Why Choose Keya Supply</h2>
+        <div class="module-subtitle font-serif">The reasons industrial buyers across North America keep coming back.</div>
+      </div>
+    </div>
+    <div class="row">
+
+      <!-- Left column: 4 features -->
+      <div class="col-sm-6 col-md-3">
+        <div class="alt-features-item">
+          <div class="alt-features-icon"><i class="fa fa-dollar"></i></div>
+          <div>
+            <h3 class="alt-features-title font-alt">Competitive Pricing</h3>
+            <p>We source directly from certified manufacturers, eliminating middlemen and delivering maximum value on every bulk order.</p>
+          </div>
+        </div>
+        <div class="alt-features-item">
+          <div class="alt-features-icon"><i class="fa fa-truck"></i></div>
+          <div>
+            <h3 class="alt-features-title font-alt">Reliable Supply Chain</h3>
+            <p>Maintained inventory and streamlined logistics from the Windsor–Detroit corridor to all of North America.</p>
+          </div>
+        </div>
+        <div class="alt-features-item">
+          <div class="alt-features-icon"><i class="fa fa-certificate"></i></div>
+          <div>
+            <h3 class="alt-features-title font-alt">Certified &amp; Compliant</h3>
+            <p>ISO certified operations. AAR-approved strapping for rail. Custom widths, thicknesses, and colors available on request.</p>
+          </div>
+        </div>
+        <div class="alt-features-item">
+          <div class="alt-features-icon"><i class="fa fa-leaf"></i></div>
+          <div>
+            <h3 class="alt-features-title font-alt">Eco-Friendly</h3>
+            <p>Fully recyclable PET strapping that supports your organization's sustainability and green supply chain goals.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Centre: product photo -->
+      <div class="col-md-6 hidden-xs hidden-sm">
+        <div class="alt-services-image">
+          <!--
+            TO CHANGE THIS PHOTO: replace Straps.jpg with your image filename.
+            Place the image in the same folder as this HTML file.
+          -->
+          <img src="Straps.jpg" alt="Keya Supply strapping products">
+        </div>
+      </div>
+
+      <!-- Right column: 4 features -->
+      <div class="col-sm-6 col-md-3">
+        <div class="alt-features-item">
+          <div class="alt-features-icon"><i class="fa fa-exchange"></i></div>
+          <div>
+            <h3 class="alt-features-title font-alt">EDI Compatible</h3>
+            <p>Seamless order placement and demand forecasting integration — making procurement as easy as possible for your operation.</p>
+          </div>
+        </div>
+        <div class="alt-features-item">
+          <div class="alt-features-icon"><i class="fa fa-industry"></i></div>
+          <div>
+            <h3 class="alt-features-title font-alt">Direct from Source</h3>
+            <p>We work directly with ISO-certified manufacturers. No distributors, no markups — just quality product at the best possible cost.</p>
+          </div>
+        </div>
+        <div class="alt-features-item">
+          <div class="alt-features-icon"><i class="fa fa-map-marker"></i></div>
+          <div>
+            <h3 class="alt-features-title font-alt">Windsor &amp; Detroit</h3>
+            <p>Strategically positioned at the Canada–U.S. border. Fast cross-border delivery to both Canadian and American buyers.</p>
+          </div>
+        </div>
+        <div class="alt-features-item">
+          <div class="alt-features-icon"><i class="fa fa-headphones"></i></div>
+          <div>
+            <h3 class="alt-features-title font-alt">Customer First</h3>
+            <p>Your packaging challenges are our priority. We go the extra mile to ensure the right product arrives on time, every time.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     BROCHURE DOWNLOAD BAND
+     bg: linear-gradient #2a5c42 → #3a7d5c  (slightly lighter green)
+     Button: .btn-w (white solid)
+═══════════════════════════════════════════════════════ -->
+<div class="callout-bg brochure-band" style="background: linear-gradient(135deg, #2a5c42, #3a7d5c);">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="callout-text font-alt">
+          <h3 class="callout-title">Download Our Product Brochure</h3>
+          <p>Get complete specifications and technical data in one convenient PDF.</p>
+        </div>
+      </div>
+      <div class="col-sm-4" style="display:flex; align-items:center;">
+        <a class="btn-w" href="Keya Supply Co.pdf" download>
+          <i class="fa fa-download"></i> Download Brochure
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     INDUSTRIES GRID
+     bg: #ffffff (white), full-bleed image grid below section header
+     9 industry cards — hover reveals green overlay + title
+     Each card: background-image set inline on .industry-placeholder
+     TO ADD/CHANGE PHOTO: edit the background-image:url('filename') value
+     Image files used: auto.jpg, Metal.jpg, Bailing.png, Tubing.png,
+       Cans.jpg, Lumber.jpg, Paver.jpg, Glass.jpg  + 1 placeholder
+═══════════════════════════════════════════════════════ -->
+<section class="module pb-0" id="industries">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <h2 class="module-title font-alt">Industries We Serve</h2>
+        <div class="module-subtitle font-serif">
+          From automotive plants to lumber yards, our strapping solutions are
+          engineered for the demands of heavy industry across the U.S. and Canada.
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul class="works-grid">
+
+    <li class="work-item">
+      <div class="industry-placeholder" style="background-image:url('auto.jpg'); background-size:cover; background-position:center;"></div>
+      <div class="work-caption font-alt">
+        <h3 class="work-title">Automotive</h3>
+        <div class="work-descr">Automotive Palletization &amp; Transit</div>
+      </div>
+    </li>
+
+    <li class="work-item">
+      <div class="industry-placeholder" style="background-image:url('Metal.jpg'); background-size:cover; background-position:center;"></div>
+      <div class="work-caption font-alt">
+        <h3 class="work-title">Metal Packaging</h3>
+        <div class="work-descr">Steel Coils &amp; Sheet Metal</div>
+      </div>
+    </li>
+
+    <li class="work-item">
+      <div class="industry-placeholder" style="background-image:url('Bailing.png'); background-size:cover; background-position:center;"></div>
+      <div class="work-caption font-alt">
+        <h3 class="work-title">Textile Industry</h3>
+        <div class="work-descr">Baling &amp; Bundling</div>
+      </div>
+    </li>
+
+    <li class="work-item">
+      <div class="industry-placeholder" style="background-image:url('Tubing.png'); background-size:cover; background-position:center;"></div>
+      <div class="work-caption font-alt">
+        <h3 class="work-title">Tubing</h3>
+        <div class="work-descr">Bundling &amp; Shipping</div>
+      </div>
+    </li>
+
+    <li class="work-item">
+      <div class="industry-placeholder" style="background-image:url('Cans.jpg'); background-size:cover; background-position:center;"></div>
+      <div class="work-caption font-alt">
+        <h3 class="work-title">Bottling Industries</h3>
+        <div class="work-descr">Beverage &amp; Bottling Plants</div>
+      </div>
+    </li>
+
+    <li class="work-item">
+      <div class="industry-placeholder" style="background-image:url('Lumber.jpg'); background-size:cover; background-position:center;"></div>
+      <div class="work-caption font-alt">
+        <h3 class="work-title">Building Material &amp; Lumber</h3>
+        <div class="work-descr">Lumber Yards &amp; Construction Supply</div>
+      </div>
+    </li>
+
+    <li class="work-item">
+      <div class="industry-placeholder" style="background-image:url('Paver.jpg'); background-size:cover; background-position:center;"></div>
+      <div class="work-caption font-alt">
+        <h3 class="work-title">Paver Industry</h3>
+        <div class="work-descr">Storage &amp; Distribution</div>
+      </div>
+    </li>
+
+    <li class="work-item">
+      <div class="industry-placeholder" style="background-image:url('Glass.jpg'); background-size:cover; background-position:center;"></div>
+      <div class="work-caption font-alt">
+        <h3 class="work-title">Glass &amp; Ceramic</h3>
+        <div class="work-descr">Fragile Load Securing</div>
+      </div>
+    </li>
+
+    <li class="work-item">
+
+<div class="industry-placeholder" style="background-image:url('pallet.png'); background-size:cover; background-position:center;"></div>
+   
+      
+      <div class="work-caption font-alt">
+        <h3 class="work-title">Palletization</h3>
+        <div class="work-descr">Transportation &amp; Warehousing</div>
+      </div>
+    </li>
+
+  </ul>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     STATS / COUNTER BAND
+     bg: linear-gradient #1a3a28 → #2a5c42  (deep green)
+     4 stat counters: SKUs / Industries / Coils per Pallet / Markets
+═══════════════════════════════════════════════════════ -->
+<section class="module" style="background: linear-gradient(135deg, #1a3a28 0%, #2a5c42 100%);">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <h2 class="module-title font-alt" style="color:#ffffff;">By the Numbers</h2>
+        <div class="module-subtitle" style="color:rgba(255,255,255,0.55);">A few facts about Keya Supply Co.</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <div class="count-item mb-sm-40">
+          <div class="count-icon"><i class="fa fa-list"></i></div>
+          <h3 class="count-to font-alt">22</h3>
+          <h5 class="count-title font-serif">Total SKUs Available</h5>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="count-item mb-sm-40">
+          <div class="count-icon"><i class="fa fa-industry"></i></div>
+          <h3 class="count-to font-alt">9+</h3>
+          <h5 class="count-title font-serif">Industry Applications</h5>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="count-item mb-sm-40">
+          <div class="count-icon"><i class="fa fa-cube"></i></div>
+          <h3 class="count-to font-alt">28</h3>
+          <h5 class="count-title font-serif">Coils per Pallet</h5>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="count-item mb-sm-40">
+          <div class="count-icon"><i class="fa fa-map-marker"></i></div>
+          <h3 class="count-to font-alt">2</h3>
+          <h5 class="count-title font-serif">Countries</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     TESTIMONIALS SECTION
+     bg: #1a3a28  (deep forest green)
+     3 slides auto-rotate every 5s — click dots to jump
+     Quote text: rgba(255,255,255,0.85)
+     Author name: #ffffff   Role: #d49a7a (terra-light)
+═══════════════════════════════════════════════════════ -->
+<!--
+<section class="module testimonial pt-140 pb-140" id="testimonials">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="module-icon">
+          <i class="fa fa-quote-left" style="font-size:48px; color:rgba(255,255,255,0.3);"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="testimonial-slide active" id="ts-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          <blockquote class="testimonial-text font-alt">Keya Supply became our go-to PET strapping vendor within the first order. The product quality matches Signode spec-for-spec, and the cross-border delivery to our Dearborn facility is consistently on time.</blockquote>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+          <div class="testimonial-author">
+            <div class="testimonial-caption font-alt">
+              <div class="testimonial-title">Plant Manager</div>
+              <div class="testimonial-descr">Automotive Parts Supplier, Dearborn MI</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="testimonial-slide" id="ts-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          <blockquote class="testimonial-text font-alt">The AAR-approved strapping is exactly what our rail freight operation needed. Competitive pricing on full pallet orders and a team that actually understands load securing requirements.</blockquote>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+          <div class="testimonial-author">
+            <div class="testimonial-caption font-alt">
+              <div class="testimonial-title">Logistics Director</div>
+              <div class="testimonial-descr">Steel Distribution, Windsor ON</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="testimonial-slide" id="ts-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          <blockquote class="testimonial-text font-alt">We switched from our previous supplier after getting a quote from Keya. Comparable quality, lower cost per coil, and the Windsor location makes restocking our Michigan warehouse straightforward.</blockquote>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+          <div class="testimonial-author">
+            <div class="testimonial-caption font-alt">
+              <div class="testimonial-title">Procurement Manager</div>
+              <div class="testimonial-descr">Lumber &amp; Building Supply, Metro Detroit</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="testimonial-dots">
+    <button class="active" onclick="goSlide(0)"></button>
+    <button onclick="goSlide(1)"></button>
+    <button onclick="goSlide(2)"></button>
+  </div>
+</section>
+
+-->
+<!-- ═══════════════════════════════════════════════════════
+     CONTACT SECTION
+     bg: #ffffff (white)
+     Left col: contact info (phone, email, locations, hours)
+     Right col: inquiry form (6 fields)
+     ──────────────────────────────────────────────────────
+     HOW TO MAKE THE FORM SEND REAL EMAILS:
+     Option 1 — Formspree (easiest, free up to 50/month):
+       1. Sign up at https://formspree.io → New Form
+       2. Copy your endpoint URL (looks like formspree.io/f/xxxxxxxx)
+       3. Replace action="#" below with that URL
+       4. Delete the onsubmit="handleSubmit(event)" attribute
+       Done — Formspree emails you each submission.
+     Option 2 — EmailJS (free, no backend, up to 200/month):
+       See https://www.emailjs.com for setup instructions.
+     Option 3 — PHP on a self-hosted server:
+       Create send.php and change action="#" to action="send.php"
+═══════════════════════════════════════════════════════ -->
+<section class="module" id="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <h2 class="module-title font-alt">Get in Touch</h2>
+        <div class="module-subtitle font-serif">Whether you're a packaging distributor or an industrial buyer on either side of the border, we're ready to help.</div>
+      </div>
+    </div>
+    <div class="row">
+
+      <!-- Contact info -->
+      <div class="col-sm-4">
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i class="fa fa-phone"></i></div>
+          <div>
+            <div class="contact-info-label">Phone</div>
+            <div class="contact-info-val">+1 (437) 353-9903</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i class="fa fa-envelope"></i></div>
+          <div>
+            <div class="contact-info-label">Email</div>
+            <div class="contact-info-val">info@keyasupply.com</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i class="fa fa-map-marker"></i></div>
+          <div>
+            <div class="contact-info-label">Locations</div>
+            <div class="contact-info-val">
+              
+		Detroit, Michigan, USA <br>
+		Windsor, Ontario, Canada
+	    
+              
+              <small>Serving <!--Metro Detroit, Michigan, USA &amp; --> all of North America</small>
+            </div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i class="fa fa-clock-o"></i></div>
+          <div>
+            <div class="contact-info-label">Business Hours</div>
+            <div class="contact-info-val">Monday – Friday
+              <small>8:00 AM – 5:00 PM EST</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact form -->
+      <div class="col-sm-8">
+        <form id="contactForm" role="form" method="post" action="https://formspree.io/f/mojyvwro" onsubmit="handleSubmit(event)">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="fname">First Name</label>
+              <input class="form-control" type="text" id="fname" name="first_name" placeholder="John" required>
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input class="form-control" type="text" id="lname" name="last_name" placeholder="Smith" required>
+            </div>
+          </div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input class="form-control" type="text" id="company" name="company" placeholder="Your Company Inc." required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input class="form-control" type="email" id="email" name="email" placeholder="you@company.com" required>
+            </div>
+          </div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="product">Product Interest</label>
+              <select class="form-control" id="product" name="product">
+                <option>PET Strapping (Normal)</option>
+                <option>PET Strapping (AAR Approved)</option>
+                <option>PP Strapping</option>
+                <option>Multiple Products</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="volume">Estimated Volume</label>
+              <select class="form-control" id="volume" name="volume">
+                <option>1–5 pallets/month</option>
+                <option>5–20 pallets/month</option>
+                <option>20+ pallets/month</option>
+                <option>Truckload volumes</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea class="form-control" rows="5" id="message" name="message" placeholder="Tell us about your strapping requirements, quantities, or any custom specs needed…"></textarea>
+          </div>
+          <div class="text-center">
+            <button class="btn-brand btn-block" type="submit" id="cfsubmit">Send Inquiry</button>
+          </div>
+          <div class="form-success-msg" id="formSuccess">
+            ✓ Thank you — we'll be in touch within one business day.
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER WIDGETS
+     bg: #1a1a1a (dark)
+     3 columns: company info / products list / industries list
+═══════════════════════════════════════════════════════ -->
+<div class="module-small bg-dark">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="widget">
+          <h5 class="widget-title font-alt">Keya Supply Co</h5>
+          <p>Bulk wholesale PET &amp; PP strapping for distributors, logistics companies, and industrial buyers across the U.S. and Canada.</p>
+          <p>Phone: +1 (437) 353-9903</p>
+          <p>Email: info@keyasupply.com</p>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="widget">
+          <h5 class="widget-title font-alt">Products</h5>
+          <ul class="icon-list">
+            <li><a href="#products">PET Strapping (Normal) — 8 SKUs</a></li>
+            <li><a href="#products">PET Strapping (AAR Approved) — 5 SKUs</a></li>
+            <li><a href="#products">PP Strapping — 9 SKUs</a></li>
+            <li><a href="#contact">Custom Specifications</a></li>
+            <li><a href="#contact">Bulk / Truckload Orders</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="widget">
+          <h5 class="widget-title font-alt">Industries Served</h5>
+          <ul class="icon-list">
+            <li>Automobile &amp; Automotive</li>
+            <li>Metal Packaging &amp; Steel</li>
+            <li>Building Material &amp; Lumber</li>
+            <li>Bottling &amp; Paper Shipping</li>
+            <li>Palletization &amp; Warehousing</li>
+            <li>Glass, Ceramic &amp; Solid Waste</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER BAR
+     bg: #1a1a1a (dark)   copyright + social icons
+═══════════════════════════════════════════════════════ -->
+<hr class="divider-d">
+<footer class="footer bg-dark">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <p class="copyright font-alt">&copy; 2026&nbsp;<a href="#home">Keya Supply Co</a> — Pack it Right, EVERYTIME. Windsor, ON &amp; Detroit, MI.</p>
+      </div>
+      <div class="col-sm-6">
+        <div class="footer-social-links">
+        <!--  <a href="#"><i class="fa fa-linkedin"></i></a>
+          <a href="#"><i class="fa fa-facebook"></i></a> -->
+          <a href="mailto:info@keyasupply.com"><i class="fa fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /.main -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SCROLL-UP BUTTON  (fixed bottom-right, visible after scrolling 400px)
+═══════════════════════════════════════════════════════ -->
+<div class="scroll-up" id="scrollUp">
+  <a href="#home"><i class="fa fa-angle-double-up"></i></a>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     JAVASCRIPT
+     jQuery + Bootstrap 3 from CDN
+═══════════════════════════════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+
+/* ── Page loader: fade out after load ── */
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    document.getElementById('pageLoader').classList.add('loaded');
+  }, 400);
+});
+
+/* ── Navbar: go dark when scrolled past 60px ── */
+var nav = document.getElementById('mainNav');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 60) {
+    nav.classList.remove('navbar-transparent');
+    nav.classList.add('navbar-scrolled');
+  } else {
+    nav.classList.remove('navbar-scrolled');
+    nav.classList.add('navbar-transparent');
+  }
+  document.getElementById('scrollUp').classList.toggle('visible', window.scrollY > 400);
+});
+
+/* ── Mobile nav toggle ── */
+document.getElementById('navToggle').addEventListener('click', function() {
+  document.getElementById('navCollapse').classList.toggle('in');
+});
+document.querySelectorAll('#navCollapse a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    document.getElementById('navCollapse').classList.remove('in');
+  });
+});
+
+/* ── Smooth scroll for anchor links ── */
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      window.scrollTo({ top: target.offsetTop - 68, behavior: 'smooth' });
+    }
+  });
+});
+
+/* ── Product tab switching ── */
+function switchTab(id, btn) {
+  document.querySelectorAll('.ptab-content').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelectorAll('.ptab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('ptab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ── Testimonial slider (auto-advances every 5s) ── */
+var currentSlide = 0;
+var totalSlides  = 3;
+function goSlide(n) {
+  document.querySelectorAll('.testimonial-slide').forEach(function(s) { s.classList.remove('active'); });
+  document.querySelectorAll('.testimonial-dots button').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('ts-' + n).classList.add('active');
+  document.querySelectorAll('.testimonial-dots button')[n].classList.add('active');
+  currentSlide = n;
+}
+setInterval(function() { goSlide((currentSlide + 1) % totalSlides); }, 5000);
+
+/* ── Contact form with AJAX submission (no page redirect) ── */
+async function handleSubmit(e) {
+  e.preventDefault();
+  
+  const form = e.target;
+  const submitBtn = document.getElementById('cfsubmit');
+  const successMsg = document.getElementById('formSuccess');
+  const formData = new FormData(form);
+  
+  // Show loading state
+  const originalBtnText = submitBtn.innerHTML;
+  submitBtn.innerHTML = 'Sending...';
+  submitBtn.disabled = true;
+  
+  try {
+    // Send to Formspree via AJAX
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+    
+    if (response.ok) {
+      // Success - show message and reset form
+      successMsg.style.display = 'block';
+      form.reset();
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        successMsg.style.display = 'none';
+      }, 5000);
+      
+      // Optional: smooth scroll to show the success message
+      successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      // Error response from Formspree
+      const data = await response.json();
+      if (data.errors) {
+        alert('Error: ' + data.errors.map(error => error.message).join(', '));
+      } else {
+        alert('Oops! Something went wrong. Please try again or email us directly.');
+      }
+    }
+  } catch (error) {
+    console.error('Form submission error:', error);
+    alert('Network error. Please check your connection and try again.');
+  } finally {
+    // Reset button state
+    submitBtn.innerHTML = originalBtnText;
+    submitBtn.disabled = false;
+  }
+}
+
+
+</script>
+</body>
+</html>
